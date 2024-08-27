@@ -59,7 +59,7 @@ if __name__ == '__main__':
     NUM_EPOCHS = opt.num_epochs
     
     # Add this line to set the desired number of training samples
-    TRAIN_SAMPLE_COUNT = 100  # Change this to your desired number
+    TRAIN_SAMPLE_COUNT = 10000  # Change this to your desired number
     
     train_set = TrainDatasetFromFolder('/kaggle/input/cctv-train/resized_images', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
     
@@ -199,7 +199,7 @@ if __name__ == '__main__':
                      display_transform()(sr.data.cpu().squeeze(0))])
             
             # Save only 10 validation image results for every 20 epochs
-            if epoch % 10 == 0:
+            if epoch % 1 == 0:
                 val_images = torch.stack(val_images[:30])  # Take only first 10 sets (30 images)
                 val_images = torch.chunk(val_images, val_images.size(0) // 3)
                 val_save_bar = tqdm(val_images, desc='[saving validation results]')
@@ -248,7 +248,7 @@ if __name__ == '__main__':
         perf_df.to_csv(f'{out_path}performance_metrics.csv', index=False)
         
         # Save training results every 10 epochs
-        if epoch % 10 == 0:
+        if epoch % 1 == 0:
             data_frame = pd.DataFrame(
                 data={'Loss_D': results['d_loss'], 'Loss_G': results['g_loss'], 'Score_D': results['d_score'],
                       'Score_G': results['g_score'], 'PSNR': results['psnr'], 'SSIM': results['ssim']},
