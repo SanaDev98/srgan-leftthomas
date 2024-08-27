@@ -199,7 +199,7 @@ if __name__ == '__main__':
                      display_transform()(sr.data.cpu().squeeze(0))])
             
             # Save only 10 validation image results for every 20 epochs
-            if epoch % 1 == 0:
+            if epoch % 10 == 0:
                 val_images = torch.stack(val_images[:30])  # Take only first 10 sets (30 images)
                 val_images = torch.chunk(val_images, val_images.size(0) // 3)
                 val_save_bar = tqdm(val_images, desc='[saving validation results]')
