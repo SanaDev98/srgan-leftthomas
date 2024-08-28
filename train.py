@@ -29,7 +29,7 @@ parser.add_argument('--crop_size', default=88, type=int, help='training images c
 parser.add_argument('--upscale_factor', default=4, type=int, choices=[2, 4, 8],
                     help='super resolution upscale factor')
 parser.add_argument('--num_epochs', default=100, type=int, help='train epoch number')
-parser.add_argument('--train_sample_count', default=10000, type=int, help='number of training samples to use')
+parser.add_argument('--train_sample_count', default=20000, type=int, help='number of training samples to use')
 
 def get_performance_metrics():
     gpus = GPUtil.getGPUs()
@@ -61,14 +61,14 @@ if __name__ == '__main__':
     # Add this line to set the desired number of training samples
     TRAIN_SAMPLE_COUNT = 20000  # Change this to your desired number
     
-    train_set = TrainDatasetFromFolder('/kaggle/input/faces-train/', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
+    train_set = TrainDatasetFromFolder('/kaggle/input/cctv-train/resized_images', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
     
     # Limit the number of training samples
     if len(train_set) > TRAIN_SAMPLE_COUNT:
         indices = random.sample(range(len(train_set)), TRAIN_SAMPLE_COUNT)
         train_set = Subset(train_set, indices)
     
-    val_set = ValDatasetFromFolder('/kaggle/input/faces-validation/', upscale_factor=UPSCALE_FACTOR)
+    val_set = ValDatasetFromFolder('/kaggle/input/cctv-train/resized_images', upscale_factor=UPSCALE_FACTOR)
     train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
     
