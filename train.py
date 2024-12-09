@@ -59,7 +59,7 @@ if __name__ == '__main__':
     NUM_EPOCHS = opt.num_epochs
     
     # Add this line to set the desired number of training samples
-    TRAIN_SAMPLE_COUNT = 10000  # Change this to your desired number
+    TRAIN_SAMPLE_COUNT = 20000  # Change this to your desired number
     
     # train_set = TrainDatasetFromFolder('/kaggle/input/cctv-train/resized_images', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
     train_set = TrainDatasetFromFolder('/kaggle/input/faces-train/', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
