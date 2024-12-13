@@ -61,8 +61,8 @@ if __name__ == '__main__':
     # Add this line to set the desired number of training samples
     TRAIN_SAMPLE_COUNT = 20000  # Change this to your desired number
     
-    #train_set = TrainDatasetFromFolder('/kaggle/input/cctv-train/resized_images', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
-    train_set = TrainDatasetFromFolder('/kaggle/input/faces-train/', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
+    train_set = TrainDatasetFromFolder('/kaggle/input/cctv-train/resized_images', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
+    #train_set = TrainDatasetFromFolder('/kaggle/input/faces-train/', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
 
     
     # Limit the number of training samples
@@ -70,8 +70,8 @@ if __name__ == '__main__':
         indices = random.sample(range(len(train_set)), TRAIN_SAMPLE_COUNT)
         train_set = Subset(train_set, indices)
     
-    val_set = ValDatasetFromFolder('/kaggle/input/faces-validation/', upscale_factor=UPSCALE_FACTOR)
-    #val_set = ValDatasetFromFolder('/kaggle/input/cctv-train/resized_images', upscale_factor=UPSCALE_FACTOR)
+    #val_set = ValDatasetFromFolder('/kaggle/input/faces-validation/', upscale_factor=UPSCALE_FACTOR)
+    val_set = ValDatasetFromFolder('/kaggle/input/cctv-train/resized_images', upscale_factor=UPSCALE_FACTOR)
     train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
     
