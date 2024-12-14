@@ -71,7 +71,7 @@ if __name__ == '__main__':
         train_set = Subset(train_set, indices)
     
     #val_set = ValDatasetFromFolder('/kaggle/input/faces-validation/', upscale_factor=UPSCALE_FACTOR)
-    val_set = ValDatasetFromFolder('/kaggle/input/cctv-validate', upscale_factor=UPSCALE_FACTOR)
+    val_set = ValDatasetFromFolder('/kaggle/input/painting-validate', upscale_factor=UPSCALE_FACTOR)
     train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
     
