@@ -59,9 +59,9 @@ if __name__ == '__main__':
     NUM_EPOCHS = opt.num_epochs
     
     # Add this line to set the desired number of training samples
-    TRAIN_SAMPLE_COUNT = 20000  # Change this to your desired number
+    TRAIN_SAMPLE_COUNT = 1000  # Change this to your desired number
     
-    train_set = TrainDatasetFromFolder('/kaggle/input/painting-train', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
+    train_set = TrainDatasetFromFolder('/kaggle/input/historic-art/complete/artwork', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
     #train_set = TrainDatasetFromFolder('/kaggle/input/faces-train/', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
 
     
@@ -71,7 +71,7 @@ if __name__ == '__main__':
         train_set = Subset(train_set, indices)
     
     #val_set = ValDatasetFromFolder('/kaggle/input/faces-validation/', upscale_factor=UPSCALE_FACTOR)
-    val_set = ValDatasetFromFolder('/kaggle/input/painting-validate', upscale_factor=UPSCALE_FACTOR)
+    val_set = ValDatasetFromFolder('/kaggle/input/historic-art/complete/artwork', upscale_factor=UPSCALE_FACTOR)
     train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
     
