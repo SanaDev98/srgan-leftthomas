@@ -29,7 +29,7 @@ parser.add_argument('--crop_size', default=88, type=int, help='training images c
 parser.add_argument('--upscale_factor', default=4, type=int, choices=[2, 4, 8],
                     help='super resolution upscale factor')
 parser.add_argument('--num_epochs', default=100, type=int, help='train epoch number')
-parser.add_argument('--train_sample_count', default=10000, type=int, help='number of training samples to use')
+parser.add_argument('--train_sample_count', default=20000, type=int, help='number of training samples to use')
 
 def get_performance_metrics():
     gpus = GPUtil.getGPUs()
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     
     val_set = ValDatasetFromFolder('/kaggle/input/painting-validation/resized', upscale_factor=UPSCALE_FACTOR)
     #val_set = ValDatasetFromFolder('/kaggle/input/faces-validation/', upscale_factor=UPSCALE_FACTOR)
-    train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
+    train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=16, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
     
     netG = Generator(UPSCALE_FACTOR)
