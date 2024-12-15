@@ -70,7 +70,7 @@ if __name__ == '__main__':
         indices = random.sample(range(len(train_set)), TRAIN_SAMPLE_COUNT)
         train_set = Subset(train_set, indices)
     
-    val_set = ValDatasetFromFolder('/kaggle/input/painting-validation', upscale_factor=UPSCALE_FACTOR)
+    val_set = ValDatasetFromFolder('/kaggle/input/painting-validation/resized', upscale_factor=UPSCALE_FACTOR)
     #val_set = ValDatasetFromFolder('/kaggle/input/faces-validation/', upscale_factor=UPSCALE_FACTOR)
     train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
@@ -202,7 +202,7 @@ if __name__ == '__main__':
                      display_transform()(sr.data.cpu().squeeze(0))])
             
             # Save only 10 validation image results for every 20 epochs
-            if epoch % 10 == 0:
+            if epoch % 5 == 0:
                 val_images = torch.stack(val_images[:30])  # Take only first 10 sets (30 images)
                 val_images = torch.chunk(val_images, val_images.size(0) // 3)
                 val_save_bar = tqdm(val_images, desc='[saving validation results]')
