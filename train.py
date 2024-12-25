@@ -69,6 +69,14 @@ if __name__ == '__main__':
         train_set = Subset(train_set, indices)
     
     val_set = ValDatasetFromFolder('/kaggle/input/architecture-validation/resized', upscale_factor=UPSCALE_FACTOR)
+
+    # Limit the number of validation samples to 2000
+    VALIDATION_SAMPLE_COUNT = 2000  # Desired number of validation samples
+    if len(val_set) > VALIDATION_SAMPLE_COUNT:
+        val_indices = random.sample(range(len(val_set)), VALIDATION_SAMPLE_COUNT)
+        val_set = Subset(val_set, val_indices)
+
+
     train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
     
