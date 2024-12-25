@@ -61,7 +61,7 @@ if __name__ == '__main__':
     # Add this line to set the desired number of training samples
     TRAIN_SAMPLE_COUNT = 20000  # Change this to your desired number
     
-    train_set = TrainDatasetFromFolder('/kaggle/input/painting-train', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
+    train_set = TrainDatasetFromFolder('/kaggle/input/architecture-train/resized', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
     #train_set = TrainDatasetFromFolder('/kaggle/input/faces-train/', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
 
     
@@ -70,9 +70,15 @@ if __name__ == '__main__':
         indices = random.sample(range(len(train_set)), TRAIN_SAMPLE_COUNT)
         train_set = Subset(train_set, indices)
     
-    val_set = ValDatasetFromFolder('/kaggle/input/painting-validation/resized', upscale_factor=UPSCALE_FACTOR)
+    val_set = ValDatasetFromFolder('/kaggle/input/architecture-validation/resized', upscale_factor=UPSCALE_FACTOR)
+    VALIDATION_SAMPLE_COUNT = 2000  # Desired number of validation samples
+    if len(val_set) > VALIDATION_SAMPLE_COUNT:
+        val_indices = random.sample(range(len(val_set)), VALIDATION_SAMPLE_COUNT)
+        val_set = Subset(val_set, val_indices)
+
+
     #val_set = ValDatasetFromFolder('/kaggle/input/faces-validation/', upscale_factor=UPSCALE_FACTOR)
-    train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=8, shuffle=True)
+    train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
     
     netG = Generator(UPSCALE_FACTOR)
