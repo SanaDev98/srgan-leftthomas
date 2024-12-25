@@ -62,15 +62,19 @@ if __name__ == '__main__':
     TRAIN_SAMPLE_COUNT = 20000  # Change this to your desired number
     
     #train_set = TrainDatasetFromFolder('/kaggle/input/faces-train/resized_images', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
-    train_set = TrainDatasetFromFolder('/kaggle/input/face-grayscale-validation', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
+    train_set = TrainDatasetFromFolder('/kaggle/input/architecture-train/resized', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
     # Limit the number of training samples
     if len(train_set) > TRAIN_SAMPLE_COUNT:
         indices = random.sample(range(len(train_set)), TRAIN_SAMPLE_COUNT)
         train_set = Subset(train_set, indices)
     
     #val_set = ValDatasetFromFolder('/kaggle/input/faces-validation/resized_images', upscale_factor=UPSCALE_FACTOR)
-    val_set = ValDatasetFromFolder('/kaggle/input/grasdad', upscale_factor=UPSCALE_FACTOR)
-
+    val_set = ValDatasetFromFolder('/kaggle/input/architecture-validation/resized', upscale_factor=UPSCALE_FACTOR)
+    
+    VALIDATION_SAMPLE_COUNT = 2000  # Desired number of validation samples
+    if len(val_set) > VALIDATION_SAMPLE_COUNT:
+        val_indices = random.sample(range(len(val_set)), VALIDATION_SAMPLE_COUNT)
+        val_set = Subset(val_set, val_indices)
 
     train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
